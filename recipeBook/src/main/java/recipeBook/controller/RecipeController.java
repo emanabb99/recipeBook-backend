@@ -8,7 +8,7 @@ import recipeBook.entity.Recipe;
 import recipeBook.service.RecipeService;
 
 
-@CrossOrigin(origins = "http://localhost:5173") //allows spring to speak to my front end regardless of port numbers
+@CrossOrigin(origins="http://localhost:5173") //allows spring to speak to my front end regardless of port numbers
 
 @RestController
 public class RecipeController {
@@ -21,7 +21,6 @@ public class RecipeController {
 
     @PostMapping("/recipes") //goes on the method
     public Recipe createRecipe(@RequestBody Recipe recipe) {
-        System.out.println("Recipe in spring");
         return recipeService.createRecipe(recipe);
     }
 
