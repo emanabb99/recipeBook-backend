@@ -2,11 +2,11 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY gradlew .
-COPY gradle gradle
-COPY build.gradle .
-COPY settings.gradle .
-COPY src src
+COPY recipeBook/gradlew .
+COPY recipeBook/gradle gradle
+COPY recipeBook/build.gradle .
+COPY recipeBook/settings.gradle .
+COPY recipeBook/src src
 
 RUN chmod +x gradlew
 RUN ./gradlew build -x test
