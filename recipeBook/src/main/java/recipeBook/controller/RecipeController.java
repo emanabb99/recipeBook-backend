@@ -1,6 +1,7 @@
 package recipeBook.controller;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import recipeBook.entity.Recipe;
 import recipeBook.service.RecipeService;
 
@@ -19,7 +20,18 @@ public class RecipeController {
     }
 
     @PostMapping //goes on the method
-    public Recipe createRecipe(@RequestBody Recipe recipe) {
+    public Recipe createRecipe(
+            @RequestParam("name") String name, //the bit in speech marks is the name of the field from the front end request
+            @RequestParam("ingredients") String ingredients,
+            @RequestParam("instructions") String instructions,
+            @RequestParam("file") MultipartFile file
+    ) {
+        Recipe recipe = new Recipe();
+        recipe.setName(name);
+        recipe.setIngredients(ingredients);
+        recipe.setInstructions(instructions);
+        recipe.setImageUrl(file.getOriginalFilename());
+
         return recipeService.createRecipe(recipe);
     }
 
