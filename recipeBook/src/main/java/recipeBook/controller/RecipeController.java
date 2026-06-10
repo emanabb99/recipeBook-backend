@@ -6,8 +6,11 @@ import recipeBook.service.RecipeService;
 
 import java.util.List;
 
-//allows spring to speak to my front end regardless of port numbers
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/recipes")
 public class RecipeController {
