@@ -1,0 +1,6 @@
+*.html linguist-vendored
+*.htm linguist-vendored
+*.xhtml linguist-vendored
+*.xml linguist-vendored
+
+*.java linguist-detectable=true
