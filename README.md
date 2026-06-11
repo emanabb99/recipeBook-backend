@@ -1,4 +1,4 @@
-# RecipeBook (Backend / Frontend)
+# RecipeBook (Backend)
 
 A decoupled REST API engineered with Java, Spring Boot, and PostgreSQL, featuring robust CRUD functionality and relational data mapping via Spring Data JPA.
 
