@@ -24,4 +24,12 @@ public class RecipeService {
     public List<Recipe> viewRecipes() {
         return recipeRepository.findAll();
     }
+
+    public void deleteRecipe(Long id) {
+        if (recipeRepository.findById(id)) {
+            recipeRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Recipe not found");
+        }
+    }
 }
