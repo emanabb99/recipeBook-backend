@@ -3,6 +3,9 @@ import recipeBook.entity.Recipe;
 import recipeBook.repository.RecipeRepository;
 import recipeBook.service.RecipeService;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -44,6 +47,32 @@ public class RecipeServiceTest {
     }
 
     @Test
+    void editRecipeIfRecipeExists() {
+        RecipeRepository recipeRepository = mock(RecipeRepository.class);
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        when(recipeRepository.findById(1L))
+                .thenReturn(Optional.of(recipe));
+        when(recipeRepository.save(recipe))
+                .thenReturn(recipe);
+
+        RecipeService recipeService = new RecipeService(recipeRepository);
+        assertEquals(recipe,recipeService.editRecipe(recipe));
+    }
+
+    @Test
+    void editRecipeIfRecipeDoesntExist() {
+        RecipeRepository recipeRepository = mock(RecipeRepository.class);
+        when(recipeRepository.findById(2L))
+                .thenReturn(Optional.empty());
+
+        RecipeService recipeService = new RecipeService(recipeRepository);
+        Recipe recipe = new Recipe();
+        recipe.setId(2L);
+        assertThrows(NoSuchElementException.class,()->recipeService.editRecipe(recipe));
+    }
+
+    @Test
     void checkDeleteRecipeIfRecipeExists() {
         RecipeRepository recipeRepository = mock(RecipeRepository.class);
         when(recipeRepository.existsById(1L))
@@ -61,7 +90,7 @@ public class RecipeServiceTest {
         when(recipeRepository.existsById(1L))
                 .thenReturn(false);
 
-        RecipeService recipeService = new RecipeService(recipeRepository);;
+        RecipeService recipeService = new RecipeService(recipeRepository);
 
         assertThrows(RuntimeException.class,()->recipeService.deleteRecipe(1L));
     }
