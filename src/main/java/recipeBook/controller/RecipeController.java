@@ -1,11 +1,10 @@
 package recipeBook.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import recipeBook.entity.Recipe;
 import recipeBook.service.RecipeService;
+
+import java.util.List;
 
 
 @CrossOrigin(origins="http://localhost:5173") //allows spring to speak to my front end regardless of port numbers
@@ -22,6 +21,11 @@ public class RecipeController {
     @PostMapping("/recipes") //goes on the method
     public Recipe createRecipe(@RequestBody Recipe recipe) {
         return recipeService.createRecipe(recipe);
+    }
+
+    @GetMapping("/recipes")
+    public List<Recipe> viewRecipes() {
+        return recipeService.viewRecipes();
     }
 
 }

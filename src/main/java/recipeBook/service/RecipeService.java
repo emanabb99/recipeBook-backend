@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import recipeBook.entity.Recipe;
 import recipeBook.repository.RecipeRepository;
 
+import java.util.List;
+
 @Service
 public class RecipeService {
 
@@ -17,5 +19,9 @@ public class RecipeService {
 
     public Recipe createRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
+    }
+
+    public List<Recipe> viewRecipes() {
+        return recipeRepository.findAll();
     }
 }
