@@ -5,7 +5,6 @@ import recipeBook.entity.Recipe;
 import recipeBook.repository.RecipeRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -26,8 +25,8 @@ public class RecipeService {
     }
 
     public Recipe editRecipe(Recipe recipe) {
-        Optional<Recipe> recipeToEdit = recipeRepository.findById(recipe.getId());
-        Recipe existingRecipe = recipeToEdit.orElseThrow();
+        Recipe existingRecipe = recipeRepository.findById(recipe.getId())
+                        .orElseThrow();
         existingRecipe.setName(recipe.getName());
         existingRecipe.setIngredients(recipe.getIngredients());
         existingRecipe.setInstructions(recipe.getInstructions());
