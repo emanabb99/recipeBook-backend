@@ -18,7 +18,7 @@ public class RecipeServiceTest {
         recipe.setInstructions("Add banana and bread");
         RecipeRepository recipeRepository = mock(RecipeRepository.class);
         RecipeService recipeService = new RecipeService(recipeRepository);
-        when(recipeService.createRecipe(recipe))
+        when(recipeRepository.save(recipe))
                 .thenReturn(recipe);
 
         Recipe createdRecipe = recipeService.createRecipe(recipe);
