@@ -15,7 +15,6 @@ public class RecipeService {
     public RecipeService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
-    //Spring creates and calls this constructor for you and brings in the repository
 
     public Recipe createRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
@@ -26,7 +25,7 @@ public class RecipeService {
     }
 
     public void deleteRecipe(Long id) {
-        if (recipeRepository.findById(id)) {
+        if (recipeRepository.existsById(id)) {
             recipeRepository.deleteById(id);
         } else {
             throw new RuntimeException("Recipe not found");

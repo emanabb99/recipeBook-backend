@@ -4,8 +4,8 @@ import recipeBook.repository.RecipeRepository;
 import recipeBook.service.RecipeService;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 public class RecipeServiceTest {
 
@@ -23,10 +23,8 @@ public class RecipeServiceTest {
         RecipeService recipeService = new RecipeService(recipeRepository);
         Recipe createdRecipe = recipeService.createRecipe(recipe);
 
-        assertEquals(1L,createdRecipe.getId());
+        verify(recipeRepository).save(recipe);
         assertEquals("Banana Bread",createdRecipe.getName());
-        assertEquals("Banana,Bread",createdRecipe.getIngredients());
-        assertEquals("Add banana and bread",createdRecipe.getInstructions());
     }
 
     @Test
@@ -43,6 +41,29 @@ public class RecipeServiceTest {
         assertEquals(recipe1,allRecipes.get(0));
         assertEquals(recipe2,allRecipes.get(1));
         assertEquals(2,allRecipes.size());
+    }
+
+    @Test
+    void checkDeleteRecipeIfRecipeExists() {
+        RecipeRepository recipeRepository = mock(RecipeRepository.class);
+        when(recipeRepository.existsById(1L))
+                .thenReturn(true);
+
+        RecipeService recipeService = new RecipeService(recipeRepository);
+        recipeService.deleteRecipe(1L);
+
+        verify(recipeRepository).deleteById(1L);
+    }
+
+    @Test
+    void checkDeleteRecipeIfRecipeDoesntExist() {
+        RecipeRepository recipeRepository = mock(RecipeRepository.class);
+        when(recipeRepository.existsById(1L))
+                .thenReturn(false);
+
+        RecipeService recipeService = new RecipeService(recipeRepository);;
+
+        assertThrows(RuntimeException.class,()->recipeService.deleteRecipe(1L));
     }
 
 

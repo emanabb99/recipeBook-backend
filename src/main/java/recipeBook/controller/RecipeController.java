@@ -28,4 +28,12 @@ public class RecipeController {
         return recipeService.viewRecipes();
     }
 
+//    @PutMapping("/recipes")
+//    public Recipe
+
+    @DeleteMapping("/recipes/{id}")
+    public void deleteRecipe(@PathVariable Long id) {
+        recipeService.deleteRecipe(id);
+    }
+
 }
