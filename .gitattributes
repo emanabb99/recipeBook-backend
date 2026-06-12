@@ -1,6 +1,8 @@
+# Treat all HTML and XML files as vendor/generated files so they are ignored in language stats
 *.html linguist-vendored
 *.htm linguist-vendored
 *.xhtml linguist-vendored
 *.xml linguist-vendored
 
+# Explicitly ensure Java is detected
 *.java linguist-detectable=true
