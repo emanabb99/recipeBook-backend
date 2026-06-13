@@ -26,7 +26,7 @@ public class RecipeService {
 
     public Recipe editRecipe(Recipe recipe) {
         Recipe existingRecipe = recipeRepository.findById(recipe.getId())
-                        .orElseThrow();
+                .orElseThrow();
         existingRecipe.setName(recipe.getName());
         existingRecipe.setIngredients(recipe.getIngredients());
         existingRecipe.setInstructions(recipe.getInstructions());
@@ -34,11 +34,11 @@ public class RecipeService {
     }
 
 
-public void deleteRecipe(Long id) {
-    if (recipeRepository.existsById(id)) {
-        recipeRepository.deleteById(id);
-    } else {
-        throw new RuntimeException("Recipe not found");
+    public void deleteRecipe(Long id) {
+        if (recipeRepository.existsById(id)) {
+            recipeRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Recipe not found");
+        }
     }
-}
 }

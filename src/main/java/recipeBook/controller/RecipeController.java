@@ -7,7 +7,7 @@ import recipeBook.service.RecipeService;
 import java.util.List;
 
 
-@CrossOrigin(origins="http://localhost:5173") //allows spring to speak to my front end regardless of port numbers
+@CrossOrigin(origins="http://localhost:5173", methods = {RequestMethod.POST,RequestMethod.GET,RequestMethod.DELETE,RequestMethod.PUT})//allows spring to speak to my front end regardless of port numbers
 
 @RestController
 public class RecipeController {
@@ -34,7 +34,7 @@ public class RecipeController {
     }
 
     @DeleteMapping("/recipes/{id}")
-    public void deleteRecipe(@PathVariable Long id) {
+    public void deleteRecipe(@PathVariable("id") Long id) {
         recipeService.deleteRecipe(id);
     }
 
