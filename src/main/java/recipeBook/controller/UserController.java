@@ -1,5 +1,6 @@
 package recipeBook.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import recipeBook.entity.User;
@@ -25,10 +26,15 @@ public class UserController {
 
     @PostMapping("login")
     public ResponseEntity<?> getUser(@RequestBody Map<String,String> loginCredentials){
-        String email = loginCredentials.get("email");
-        String password = loginCredentials.get("password");
-        User user = userService.getUser(email,password);
-        return ResponseEntity.ok(user);
+        try {
+            String email = loginCredentials.get("email");
+            String password = loginCredentials.get("password");
+            User user = userService.getUser(email, password);
+            return ResponseEntity.ok(user);
+        }
+        catch(RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
     }
 
 }
