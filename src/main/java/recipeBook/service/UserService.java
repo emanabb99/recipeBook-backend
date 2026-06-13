@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import recipeBook.repository.UserRepository;
 import recipeBook.entity.User;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

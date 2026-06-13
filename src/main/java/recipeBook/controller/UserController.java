@@ -1,11 +1,11 @@
 package recipeBook.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import recipeBook.entity.User;
 import recipeBook.service.UserService;
+
+import java.util.Map;
 
 @CrossOrigin(origins="http://localhost:5173")
 
@@ -21,6 +21,14 @@ public class UserController {
     @PostMapping("/users") //this has to match the fetch on the UserService in front end for them to have different endpoints
     public User createUser(@RequestBody User user){
         return userService.createUser(user);
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<?> getUser(@RequestBody Map<String,String> loginCredentials){
+        String email = loginCredentials.get("email");
+        String password = loginCredentials.get("password");
+        User user = userService.getUser(email,password);
+        return ResponseEntity.ok(user);
     }
 
 }
