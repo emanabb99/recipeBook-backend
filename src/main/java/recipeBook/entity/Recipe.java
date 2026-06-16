@@ -1,4 +1,5 @@
 package recipeBook.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +14,17 @@ import lombok.Setter;
 public class Recipe {
 
     @Id //we need this as its used as a database tracking number
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //we dont have to set the ID now, it will automatically happen
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //we dont have to set the ID now, it will automatically happen
     private Long id;
+
     private String name;
     private String ingredients;
     private String instructions;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 }
 
 

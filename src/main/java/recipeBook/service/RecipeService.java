@@ -2,7 +2,9 @@ package recipeBook.service;
 
 import org.springframework.stereotype.Service;
 import recipeBook.entity.Recipe;
+import recipeBook.entity.User;
 import recipeBook.repository.RecipeRepository;
+import recipeBook.repository.UserRepository;
 
 import java.util.List;
 
@@ -10,13 +12,17 @@ import java.util.List;
 public class RecipeService {
 
     private final RecipeRepository recipeRepository; //once this repository is given to this service it can never change
+    private final UserRepository userRepository;
 
     //use a constructor to inject the repository;
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository) {
         this.recipeRepository = recipeRepository;
+        this.userRepository = userRepository;
     }
 
-    public Recipe createRecipe(Recipe recipe) {
+    public Recipe createRecipe(Recipe recipe, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        recipe.setUser(user);
         return recipeRepository.save(recipe);
     }
 
