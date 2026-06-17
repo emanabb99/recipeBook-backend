@@ -31,9 +31,9 @@ public class RecipeController {
         return recipeService.createRecipe(recipe,userId);
     }
 
-    @GetMapping("/recipes")
-    public List<Recipe> viewRecipes() {
-        return recipeService.viewRecipes();
+    @GetMapping("/recipes/{userId}")
+    public List<Recipe> viewRecipes(@PathVariable("userId") Long userId) {
+        return recipeService.viewRecipes(userId);
     }
 
     @PutMapping("/recipes")

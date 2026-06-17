@@ -26,8 +26,8 @@ public class RecipeService {
         return recipeRepository.save(recipe);
     }
 
-    public List<Recipe> viewRecipes() {
-        return recipeRepository.findAll();
+    public List<Recipe> viewRecipes(Long userId) {
+        return recipeRepository.findByUserId(userId);
     }
 
     public Recipe editRecipe(Recipe recipe) {
