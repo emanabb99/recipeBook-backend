@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="recipe") //store this entity in a table called RECIPES
 @Getter //automatically does getter methods
@@ -18,8 +20,10 @@ public class Recipe {
     private Long id;
 
     private String name;
-    private String ingredients;
-    private String instructions;
+    @ElementCollection (fetch=FetchType.EAGER)
+    private List<String> ingredients;
+    @ElementCollection (fetch=FetchType.EAGER)
+    private List<String> instructions;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

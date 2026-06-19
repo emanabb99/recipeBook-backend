@@ -1,6 +1,7 @@
 package recipeBook.controller;
 
 import org.springframework.web.bind.annotation.*;
+import recipeBook.entity.CreateRecipeRequest;
 import recipeBook.entity.Recipe;
 import recipeBook.repository.UserRepository;
 import recipeBook.service.RecipeService;
@@ -21,14 +22,13 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes") //goes on the method
-    public Recipe createRecipe(@RequestBody Map<String, Object> body) {
+    public Recipe createRecipe(@RequestBody CreateRecipeRequest recipeRequest) {
         Recipe recipe = new Recipe();
-        Long userId = Long.valueOf(body.get("userId").toString());
-        recipe.setName(body.get("name").toString());
-        recipe.setIngredients(body.get("ingredients").toString());
-        recipe.setInstructions(body.get("instructions").toString());
+        recipe.setName(recipeRequest.getRecipeName());
+        recipe.setIngredients(recipeRequest.getIngredients());
+        recipe.setInstructions(recipeRequest.getInstructions());
 
-        return recipeService.createRecipe(recipe,userId);
+        return recipeService.createRecipe(recipe,recipeRequest.getUserId());
     }
 
     @GetMapping("/recipes/{userId}")
