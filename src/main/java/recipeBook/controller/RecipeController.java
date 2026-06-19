@@ -24,7 +24,7 @@ public class RecipeController {
     @PostMapping("/recipes") //goes on the method
     public Recipe createRecipe(@RequestBody CreateRecipeRequest recipeRequest) {
         Recipe recipe = new Recipe();
-        recipe.setName(recipeRequest.getRecipeName());
+        recipe.setName(recipeRequest.getName());
         recipe.setIngredients(recipeRequest.getIngredients());
         recipe.setInstructions(recipeRequest.getInstructions());
 

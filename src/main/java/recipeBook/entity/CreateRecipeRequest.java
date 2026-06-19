@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CreateRecipeRequest {
     private Long userId;
-    private String recipeName;
+    private String name;
     private List<String> ingredients;
     private List<String> instructions;
 }
