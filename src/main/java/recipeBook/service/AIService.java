@@ -1,20 +1,19 @@
 package recipeBook.service;
 
 import org.springframework.stereotype.Service;
+import recipeBook.dto.AIResponse;
+
+import java.util.List;
 
 @Service
 public class AIService {
 
-    public String generateRecipe(String prompt) {
-        return "AI would generate something for " + prompt;
+
+    public AIResponse generateRecipe(String prompt) {
+        AIResponse aiResponse = new AIResponse();
+        aiResponse.setName("Mock Spaghetti Bolognese");
+        aiResponse.setIngredients(List.of("Spaghetti","Bolognese"));
+        aiResponse.setInstructions(List.of("Boil Spaghetti","Cook mince"));
+        return aiResponse;
     }
-//
-//    public String callAI(String prompt) {
-//        String customisedPrompt =  """Generate a recipe in the following format
-//                Recipe Name
-//                Recipe Ingredients
-//                Recipe Instructions
-//                based on the following prompt""" + prompt;
-//        return customisedPrompt;
-//    }
 }

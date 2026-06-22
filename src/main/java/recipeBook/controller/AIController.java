@@ -1,6 +1,7 @@
 package recipeBook.controller;
 
 import org.springframework.web.bind.annotation.*;
+import recipeBook.dto.AIResponse;
 import recipeBook.service.AIService;
 
 import java.util.Map;
@@ -17,7 +18,7 @@ public class AIController {
     }
 
     @PostMapping("/generate")
-    public String generateRecipe(@RequestBody Map<String,String> prompt) {
+    public AIResponse generateRecipe(@RequestBody Map<String,String> prompt) {
         String promptMessage = prompt.get("prompt");
         return aiService.generateRecipe(promptMessage);
     }

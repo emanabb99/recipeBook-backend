@@ -1,13 +1,12 @@
 package recipeBook.controller;
 
 import org.springframework.web.bind.annotation.*;
-import recipeBook.entity.CreateRecipeRequest;
+import recipeBook.dto.CreateRecipeRequest;
 import recipeBook.entity.Recipe;
 import recipeBook.repository.UserRepository;
 import recipeBook.service.RecipeService;
 
 import java.util.List;
-import java.util.Map;
 
 
 @CrossOrigin(origins="http://localhost:5173", methods = {RequestMethod.POST,RequestMethod.GET,RequestMethod.DELETE,RequestMethod.PUT})//allows spring to speak to my front end regardless of port numbers

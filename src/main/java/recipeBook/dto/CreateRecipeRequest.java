@@ -1,4 +1,4 @@
-package recipeBook.entity;
+package recipeBook.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
